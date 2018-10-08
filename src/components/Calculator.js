@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import math from 'mathjs';
 
 /* Constants */
@@ -18,11 +18,11 @@ function CalculatorDisplay(props) {
   const value = props.value;
   const pointAt = `${value}`.indexOf('.');
   const decimalValue = value.substring(pointAt, math.eval(value.length));
-  const precisionWithFraction = (pointAt === -1 )?0:math.eval(decimalValue.length - 1);
+  const precisionWithFraction = (pointAt === -1) ? 0 : math.eval(decimalValue.length - 1);
   let formattedValue = null;
   let scaleDown = null;
 
-  formattedValue = parseFloat(value).toLocaleString(undefined, {minimumFractionDigits: precisionWithFraction}); // take the default locale formatting
+  formattedValue = parseFloat(value).toLocaleString(undefined, { minimumFractionDigits: precisionWithFraction }); // take the default locale formatting
   if (formattedValue === 'NaN') { //account for errors
     formattedValue = 'Error';
   } else {
@@ -36,11 +36,11 @@ function CalculatorDisplay(props) {
   scaleDown = (`${formattedValue}`.length) > maxCharsAtFullSize ? scaleFactor : 'scale(1)';
   return (
     <div className="calculator-display">
-      <div className="auto-scaling-text" style={{transform: scaleDown}}>
+      <div className="auto-scaling-text" style={{ transform: scaleDown }}>
         {formattedValue}
-        </div>
       </div>
-    );
+    </div>
+  );
 }
 
 class Calculator extends Component {
@@ -61,10 +61,10 @@ class Calculator extends Component {
     const { displayValue, waitingForOperand } = this.state;
 
     if (waitingForOperand) {
-      this.setState({displayValue: `${newKeyValue}`, waitingForOperand: false, clearAll: false});
+      this.setState({ displayValue: `${newKeyValue}`, waitingForOperand: false, clearAll: false });
     } else {
-      let newDisplayValue = (displayValue === '0')?`${newKeyValue}`:`${(displayValue)}${newKeyValue}`; //no leading zero
-      this.setState({displayValue: `${newDisplayValue}`, waitingForOperand: false, clearAll: false});
+      let newDisplayValue = (displayValue === '0') ? `${newKeyValue}` : `${(displayValue)}${newKeyValue}`; //no leading zero
+      this.setState({ displayValue: `${newDisplayValue}`, waitingForOperand: false, clearAll: false });
     }
   }
 
@@ -75,7 +75,7 @@ class Calculator extends Component {
     let stringToEvaluate = null;
 
     if (firstOperand === '0' || operator == null || waitingForOperand) { // if not ready to do calculation
-      this.setState({waitingForOperand: true, firstOperand: displayValue, operator: newKeyValue, clearAll: false});
+      this.setState({ waitingForOperand: true, firstOperand: displayValue, operator: newKeyValue, clearAll: false });
       return;
     } else {
       stringToEvaluate = `${firstOperand}${operator}${displayValue}`;
@@ -87,22 +87,22 @@ class Calculator extends Component {
       if (newDisplayValue === "Infinity") { //math.js evaluates division by 0 to be "Infinity"
         newDisplayValue = 'Error';
       }
-      newOperator = (newKeyValue === "=")? null: newKeyValue;
-      this.setState({displayValue: `${newDisplayValue}`, waitingForOperand: true, firstOperand: `${newDisplayValue}`, operator: newOperator, clearAll: false})
+      newOperator = (newKeyValue === "=") ? null : newKeyValue;
+      this.setState({ displayValue: `${newDisplayValue}`, waitingForOperand: true, firstOperand: `${newDisplayValue}`, operator: newOperator, clearAll: false })
     }
   }
 
   processPoint(newKeyValue) {
     const { displayValue, waitingForOperand } = this.state;
-    const needPoint = `${displayValue}`.indexOf('.')===-1?true:false;
+    const needPoint = `${displayValue}`.indexOf('.') === -1 ? true : false;
     let newDisplayValue = null;
 
     if (waitingForOperand) { // allow point if starting on a new operand
-      this.setState({displayValue: '0.', waitingForOperand: false, clearAll: false})
+      this.setState({ displayValue: '0.', waitingForOperand: false, clearAll: false })
     } else {
       if (needPoint) { //if not inputting new operand, only allow point if it's not already present
         newDisplayValue = `${displayValue}${newKeyValue}`;
-        this.setState({displayValue: `${newDisplayValue}`, waitingForOperand: false, clearAll: false})
+        this.setState({ displayValue: `${newDisplayValue}`, waitingForOperand: false, clearAll: false })
       }
     }
   }
@@ -110,22 +110,22 @@ class Calculator extends Component {
   processPercentage(newKeyValue) {
     const { displayValue } = this.state;
     const newDisplayValue = parseFloat(displayValue).toPrecision(maxPrecision) / 100;
-    this.setState({displayValue: `${newDisplayValue}`, waitingForOperand: false, clearAll: false});
+    this.setState({ displayValue: `${newDisplayValue}`, waitingForOperand: false, clearAll: false });
   }
 
   processPlusMinusToggle(newKeyValue) {
     const { displayValue } = this.state;
     const newDisplayValue = parseFloat(displayValue).toPrecision(maxPrecision) * -1
-    this.setState({displayValue: `${newDisplayValue}`, waitingForOperand: false, clearAll: false})
+    this.setState({ displayValue: `${newDisplayValue}`, waitingForOperand: false, clearAll: false })
   }
 
   processClear() {
     const { clearAll } = this.state;
     console.log('clearAll', clearAll);
-    if ( clearAll ) {
-      this.setState({displayValue: '0', firstOperand: '0', operator: null, waitingForOperand: false, clearAll: true})
+    if (clearAll) {
+      this.setState({ displayValue: '0', firstOperand: '0', operator: null, waitingForOperand: false, clearAll: true })
     } else {
-      this.setState({displayValue: '0', clearAll: true})
+      this.setState({ displayValue: '0', clearAll: true })
     }
   }
 
@@ -175,12 +175,12 @@ class Calculator extends Component {
 
   render() {
     return (<div className="calculator">
-      <CalculatorDisplay value={this.state.displayValue}/>
+      <CalculatorDisplay value={this.state.displayValue} />
 
       <div className="calculator-keypad">
         <div className="input-keys">
           <div className="function-keys">
-            <button id="key-clear" value="C" className="calculator-key key-clear" onClick={this.handleClick}>{this.state.clearAll?'AC':'C'}</button>
+            <button id="key-clear" value="C" className="calculator-key key-clear" onClick={this.handleClick}>{this.state.clearAll ? 'AC' : 'C'}</button>
             <button id="key-sign" value="±" className="calculator-key key-sign" onClick={this.handleClick}>&plusmn;</button>
             <button id="key-percent" value="%" className="calculator-key key-percent" onClick={this.handleClick}>%</button>
           </div>

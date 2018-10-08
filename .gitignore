@@ -6,6 +6,12 @@
 # testing
 /coverage
 
+.htacces
+asset-manifest.json
+favicon.ico
+index.html
+manifest.json
+
 # misc
 .DS_Store
 .env.local
