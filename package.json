@@ -2,12 +2,8 @@
   "name": "react-calculator",
   "version": "0.0.1",
   "private": true,
-  "peerDependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "mathjs": "^5.2.0"
-  },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@babel/core": "7.1.0",
     "@svgr/webpack": "2.4.1",
     "babel-core": "7.0.0-bridge.0",
