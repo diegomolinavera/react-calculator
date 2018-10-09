@@ -115,11 +115,15 @@ module.exports = {
     chunkFilename: '[name].[chunkhash].js',
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath: publicPath,
+    libraryTarget: 'commonjs2',
     // Point sourcemap entries to original disk location (format as URL on Windows)
     devtoolModuleFilenameTemplate: info =>
       path
         .relative(paths.appSrc, info.absoluteResourcePath)
         .replace(/\\/g, '/'),
+  },
+  externals: {
+    'react': 'commonjs react'
   },
   optimization: {
     minimizer: [
