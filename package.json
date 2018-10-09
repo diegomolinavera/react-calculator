@@ -113,8 +113,8 @@
     "extends": "react-app"
   },
   "files": [
-    "build"
+    "dist"
   ],
-  "main": "build/index.js",
-  "module": "build/index.js"
+  "main": "dist/index.js",
+  "module": "dist/index.js"
 }
