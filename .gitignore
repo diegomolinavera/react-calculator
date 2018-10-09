@@ -6,6 +6,8 @@
 # testing
 /coverage
 
+/public
+
 .htacces
 asset-manifest.json
 favicon.ico
