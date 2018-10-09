@@ -1,0 +1,1 @@
+module.exports=(window.webpackJsonp=window.webpackJsonp||[]).push([[0],[function(e,n){e.exports=require("react")},,function(e,n,o){e.exports=o(3)},function(e,n,o){"use strict";o.r(n);var t=o(0),r=o.n(t),c=o(1);o.n(c).a.render(r.a.createElement("div",null,"Hello world"),document.getElementById("root"))}],[[2,2,1]]]);

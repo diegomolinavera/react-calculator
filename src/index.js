@@ -1,6 +1,4 @@
-import React from 'react';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
 
-const Calculator = () => (<App />);
-export default Calculator;
+ReactDOM.render(<div>Hello world</div>, document.getElementById("root"));
